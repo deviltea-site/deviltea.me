@@ -1,0 +1,63 @@
+{	
+	"New Vue File Template (JS)": {
+		"scope": "vue",
+		"prefix": "vue3js",
+		"body": [
+			"<template>",
+			"  <h1>{{ hello }}</h1>",
+			"</template>",
+			"",
+			"<script>",
+			"import { defineComponent } from 'vue'",
+			"",
+			"export default defineComponent({",
+			"  setup () {",
+			"    return {",
+			"      hello: 'Hello'",
+			"    }",
+			"  }",
+			"})",
+			"</script>",
+			""
+		],
+		"description": "Create new Vue file template"
+	},
+	"New Vue File Template (TS)": {
+		"scope": "vue",
+		"prefix": "vue3ts",
+		"body": [
+			"<template>",
+			"  <h1>{{ hello }}</h1>",
+			"</template>",
+			"",
+			"<script lang=\"ts\">",
+			"import { defineComponent } from 'vue'",
+			"",
+			"export default defineComponent({",
+			"  setup () {",
+			"    return {",
+			"      hello: 'Hello'",
+			"    }",
+			"  }",
+			"})",
+			"</script>",
+			""
+		],
+		"description": "Create new Vue file template"
+	},
+	"New Vue File Template (TS setup)": {
+		"scope": "vue",
+		"prefix": "vue3setupTs",
+		"body": [
+			"<template>",
+			"  <h1>{{ hello }}</h1>",
+			"</template>",
+			"",
+			"<script setup lang=\"ts\">",
+			"const hello = 'hello'",
+			"</script>",
+			""
+		],
+		"description": "Create new Vue file template"
+	}
+}

@@ -1,0 +1,5 @@
+@mixin dark {
+  @at-root html.dark & {
+    @content;
+  }
+}

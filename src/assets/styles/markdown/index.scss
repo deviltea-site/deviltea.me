@@ -1,0 +1,262 @@
+// Copyright (c) 2021 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+@import "../shared";
+@import "./highlight";
+
+@mixin variables {
+  --link-color: #008fb7;
+  --link-hover-color: #33d3ff;
+  --blockquote-side-color: #008fb7;
+  --blockquote-text-color: #666;
+  --blockquote-bg-color: #f0f2f5;
+  --code-text-color: #404040;
+  --code-bg-color: #f0f2f5;
+  --inline-code-text-color: #00b0e0;
+  --inline-code-bg-color: #f0f2f5;
+  --deflist-bg-color: #f0f2f5;
+
+  @include dark {
+    --blockquote-text-color: #aaa;
+    --blockquote-bg-color: #2e3440;
+    --code-text-color: #f8f8f2;
+    --code-bg-color: #2e3440;
+    --inline-code-bg-color: #2e3440;
+    --deflist-bg-color: #2e3440;
+  }
+}
+
+@mixin heading {
+  @for $i from 1 to 7 {
+    h#{$i} {
+      font-size: #{(2.5 - $i * 0.15)}em;
+      font-weight: 200;
+
+      &:not(:first-of-type) {
+        margin-top: #{(8 - $i * 2)}rem;
+      }
+
+      &::before {
+        content: '#';
+        margin-right: 0.1em;
+        font-size: 0.65em;
+        vertical-align: text-top;
+      }
+    }
+  }
+}
+
+@mixin divider {
+  hr {
+    margin: 2rem 3rem;
+    border-top: 1px solid rgba(135, 135, 135, 0.5);
+  }
+}
+
+@mixin link {
+  a {
+    position: relative;
+    text-decoration: none;
+    color: var(--link-color);
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--link-hover-color);
+      transition: all 0.2s;
+    }
+
+    &::content {
+      word-break: break-all;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.1rem;
+      left: 0;
+      width: 20%;
+      height: 0.1rem;
+      background-color: currentColor;
+      transition: all 0.2s;
+    }
+
+    &:hover::after {
+      width: 100%;
+      transition: all 0.2s;
+    }
+  }
+}
+
+@mixin paragraph {
+  p {
+    line-height: 1.5;
+  }
+}
+
+@mixin blockquote {
+  blockquote {
+    margin: 1rem 0;
+    padding: 1rem 1rem;
+    border-left: 0.5rem solid var(--blockquote-side-color);
+    color: var(--blockquote-text-color);
+    background-color: var(--blockquote-bg-color);
+    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.025) inset;
+
+    blockquote {
+      margin: 2rem 0.5rem;
+    }
+  }
+}
+
+@mixin code {
+  :not(pre) > code {
+    padding: 0.1em 0.2em;
+    border-radius: 0.3em;
+    color: var(--inline-code-text-color);
+    background-color: var(--inline-code-bg-color);
+  }
+
+  @include highlight;
+}
+
+@mixin custom-container {
+  div.info,
+  div.warning,
+  div.error,
+  div.success {
+    --custom-container-bg-color: #f0f2f5;
+
+    @include dark {
+      --custom-container-bg-color: #2e3440;
+    }
+
+    padding: 1.25rem;
+    color: var(--custom-container-text-color);
+    background-color: var(--custom-container-bg-color);
+    border-left: 0.5rem solid currentColor;
+  }
+
+  div.info {
+    --custom-container-text-color: #008fb7;
+  }
+
+  div.warning {
+    --custom-container-text-color: #eacf00;
+  }
+
+  div.error {
+    --custom-container-text-color: #ce0000;
+  }
+
+  div.success {
+    --custom-container-text-color: #20b73e;
+  }
+}
+
+@mixin image {
+  img {
+    display: inline-block;
+    max-width: 100%;
+
+    @include dark {
+      opacity: 0.8;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+        transition: opacity 0.2s;
+      }
+    }
+  }
+}
+
+@mixin footnote {
+  .footnote-backref {
+    display: inline-block;
+    padding: 0 0.25rem;
+    margin: 0 0.25rem;
+  }
+}
+
+@mixin deflist {
+  dl {
+    position: relative;
+    padding: 1rem;
+    padding-top: 2rem;
+    background-color: var(--deflist-bg-color);
+    font-style: italic;
+
+    &::before {
+      content: 'Def';
+      position: absolute;
+      top: 0.25rem;
+      left: 0.5rem;
+      opacity: 0.5;
+      font-style: italic;
+    }
+  }
+}
+
+@mixin mark {
+  mark {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    background-color: #33d3ff;
+  }
+}
+
+@mixin markdown {
+  .markdown {
+    @include variables;
+
+    position: relative;
+
+    & > *:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
+    a,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    div,
+    span {
+      word-break: break-word;
+    }
+
+    blockquote,
+    pre,
+    div.info,
+    div.warning,
+    div.error,
+    div.success,
+    ul,
+    ol,
+    li {
+      transform: scale(0.99);
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1);
+        transition: transform 0.2s;
+      }
+    }
+
+    @include heading;
+    @include divider;
+    @include link;
+    @include paragraph;
+    @include blockquote;
+    @include code;
+    @include custom-container;
+    @include image;
+    @include footnote;
+    @include deflist;
+    @include mark;
+  }
+}
