@@ -27,7 +27,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { useMetas } from '@/modules/metas'
 import { onMounted } from 'vue'
 

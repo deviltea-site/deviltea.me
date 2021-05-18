@@ -18,7 +18,7 @@ import { useRoute } from 'vue-router'
 import { useMetas } from '@/modules/metas'
 import { onMounted, onServerPrefetch, ref, watch } from 'vue'
 
-const { title, description, resetMetas } = useMetas()
+const { title, description } = useMetas()
 const { params } = useRoute()
 const mdModule = ref<typeof import('*.md') | null>(null)
 
@@ -31,7 +31,12 @@ watch(mdModule, (m) => {
 })
 
 const loadMdModule = async () => {
-  mdModule.value = (await import(/* @vite-ignore */ `../../posts/${params.id}.md`))
+  mdModule.value = import.meta.env.DEV
+    ? Object.entries(import.meta.globEager('../../posts/*.md'))
+      .filter(([key]) => {
+        return key.replace('../../posts/', '').replace('.md', '') === params.id
+      })[0][1]
+    : (await import(`../../posts/${params.id}.md`))
 }
 
 watch(() => params.id, async () => {
