@@ -1,7 +1,11 @@
 ---
 title: Type Challenges Notes - Medium 篇（一）
 description: 練習作答 Type Challenges Medium 難度的第一部分
-createdDate: 2021/05/11
+tags:
+  - TypeScript
+  - Type Challenges
+  - 筆記
+publishedDate: 1620835200000
 ---
 
 ## 前言

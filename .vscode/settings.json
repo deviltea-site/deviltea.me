@@ -14,25 +14,6 @@
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
   "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
-  "auto-close-tag.enableAutoCloseTag": true,
-  "auto-close-tag.excludedTags": [
-    "area",
-    "base",
-    "br",
-    "col",
-    "command",
-    "embed",
-    "hr",
-    "img",
-    "input",
-    "keygen",
-    "link",
-    "meta",
-    "param",
-    "source",
-    "track",
-    "wbr"
-  ],
   "todohighlight.isEnable": true,
   "todohighlight.include": [
     "**/*.js",
@@ -46,9 +27,14 @@
     "**/*.vue",
     "**/*.styl"
   ],
-  "i18n-ally.localesPaths": [
-    "locales",
-    "src/services/language",
-    "src/services/language/languages"
-  ]
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "[html]": {
+    "editor.linkedEditing": true
+  },
+  "[vue]": {
+    "editor.linkedEditing": true
+  },
+  "windicss.enableCodeFolding": true,
+  "windicss.enableEmmetCompletion": true,
+  "windicss.sortOnSave": true,
 }

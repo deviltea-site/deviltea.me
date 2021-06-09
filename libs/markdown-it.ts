@@ -14,12 +14,17 @@ import pluginExternalLinks from 'markdown-it-external-links'
 import pluginImsize from 'markdown-it-imsize'
 import pluginTaskLists from 'markdown-it-task-lists'
 import pluginAnchor from 'markdown-it-anchor'
+
 loadLanguages()
 
 function allPlugins (md: MarkdownIt) {
   md.use(pluginSub)
     .use(pluginSup)
-    .use(pluginAnchor)
+    .use(pluginAnchor, {
+      permalink: true,
+      permalinkBefore: true,
+      permalinkSymbol: '<icon-bx-bx-anchor></icon-bx-bx-anchor>'
+    })
     .use(pluginFootnote)
     .use(pluginDeflist)
     .use(pluginAbbr)
@@ -45,7 +50,7 @@ function allPlugins (md: MarkdownIt) {
     }
 
     /* ↩ with escape code to prevent display as Apple Emoji on iOS */
-    return '<a href="#fnref' + id + '" class="footnote-backref">Go!</a>'
+    return '<a href="#fnref' + id + '" class="footnote-backref"><icon-bx-bx-anchor></icon-bx-bx-anchor></a>'
   }
 }
 

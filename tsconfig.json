@@ -8,10 +8,12 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "vite-ssg/dist/index"],
     "baseUrl": ".",
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["src/*"]
     }
   },

@@ -1,3 +1,4 @@
+
 declare module 'markdown-it-*' {
   import MarkdownIt from 'markdown-it'
   const plugin: MarkdownIt.PluginSimple | MarkdownIt.PluginWithOptions | MarkdownIt.PluginWithParams
@@ -5,13 +6,9 @@ declare module 'markdown-it-*' {
 }
 
 declare module '*.md' {
+  import { PostAttributes } from 'blog-post-meta'
   // "unknown" would be more detailed depends on how you structure frontmatter
-  const attributes: {
-    title: string;
-    description: string;
-    createdDate: string;
-    updatedDate?: string;
-  }
+  const attributes: PostAttributes
 
   // When "Mode.TOC" is requested
   const toc: { level: string, content: string }[]

@@ -1,7 +1,11 @@
 ---
 title: Type Challenges Notes - Easy 篇
 description: 練習作答 Type Challenges 的一些筆記，Easy 難度的部分
-createdDate: 2021/05/10
+tags:
+  - TypeScript
+  - Type Challenges
+  - 筆記
+publishedDate: 1620662400000
 ---
 
 ## 前言

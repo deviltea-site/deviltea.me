@@ -30,18 +30,26 @@
 @mixin heading {
   @for $i from 1 to 7 {
     h#{$i} {
-      font-size: #{(2.5 - $i * 0.15)}em;
-      font-weight: 200;
-
-      &:not(:first-of-type) {
-        margin-top: #{(8 - $i * 2)}rem;
+      &,
+      & > * {
+        font-size: #{(2 - ($i - 1) * 0.25)}em;
+        font-weight: 500;
       }
 
       &::before {
-        content: '#';
-        margin-right: 0.1em;
-        font-size: 0.65em;
-        vertical-align: text-top;
+        content: '';
+        display: block;
+        height: 4rem;
+        margin-top: -4rem;
+      }
+
+      .header-anchor {
+        font-size: 1rem;
+        vertical-align: baseline;
+
+        &::after {
+          content: none;
+        }
       }
     }
   }
@@ -49,7 +57,7 @@
 
 @mixin divider {
   hr {
-    margin: 2rem 3rem;
+    margin: 2em 3em;
     border-top: 1px solid rgba(135, 135, 135, 0.5);
   }
 }
@@ -73,7 +81,7 @@
     &::after {
       content: '';
       position: absolute;
-      bottom: -0.1rem;
+      bottom: -0.2rem;
       left: 0;
       width: 20%;
       height: 0.1rem;
@@ -101,10 +109,10 @@
     border-left: 0.5rem solid var(--blockquote-side-color);
     color: var(--blockquote-text-color);
     background-color: var(--blockquote-bg-color);
-    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.025) inset;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
 
     blockquote {
-      margin: 2rem 0.5rem;
+      margin: 1.5rem 0.5rem;
     }
   }
 }
@@ -206,6 +214,25 @@
   }
 }
 
+@mixin list {
+  ul,
+  ol {
+    padding-left: 2em;
+  }
+
+  li {
+    margin: 0.5rem 0;
+  }
+
+  ul > li {
+    list-style: circle;
+  }
+}
+
+@mixin table {
+
+}
+
 @mixin markdown {
   .markdown {
     @include variables;
@@ -226,6 +253,7 @@
     h6,
     div,
     span {
+      font-weight: 200;
       word-break: break-word;
     }
 
@@ -258,5 +286,6 @@
     @include footnote;
     @include deflist;
     @include mark;
+    @include list;
   }
 }

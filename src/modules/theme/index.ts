@@ -9,13 +9,13 @@ type ColorSchema = 'auto' | 'dark' | 'light'
 interface UseTheme {
   isDark: Ref<boolean>;
   colorSchema: Ref<ColorSchema>;
-  switchColorSchema: () => void;
+  toggleColorSchema: () => void;
 }
 const PROVIDE_KEY: InjectionKey<UseTheme> = Symbol('theme')
 const fallback: UseTheme = {
   isDark: ref(false),
   colorSchema: ref('auto'),
-  switchColorSchema: () => {}
+  toggleColorSchema: () => {}
 }
 
 const _useTheme = (): UseTheme => {
@@ -26,8 +26,8 @@ const _useTheme = (): UseTheme => {
   const isDark = computed(() => colorSchema.value === 'auto'
     ? preferredDark.value
     : colorSchema.value === 'dark')
-  const switchColorSchema = () => {
-    colorSchema.value = order[(order.indexOf(colorSchema.value) + 1) % order.length]
+  const toggleColorSchema = () => {
+    colorSchema.value = isDark.value ? 'light' : 'dark'
   }
 
   isClient && watch(
@@ -42,7 +42,7 @@ const _useTheme = (): UseTheme => {
   return {
     colorSchema,
     isDark,
-    switchColorSchema
+    toggleColorSchema
   }
 }
 

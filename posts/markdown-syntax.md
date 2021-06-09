@@ -1,8 +1,9 @@
 ---
 title: Markdown Syntax
 description: 支援的 Markdown 語法效果展示
-createdDate: '2020/05/01'
-updatedDate: '2020/05/03'
+tags:
+  - 範例
+publishedDate: null
 ---
 
 # h1 Heading 8-)
