@@ -132,5 +132,7 @@ async function onLoad (ssr: boolean) {
 }
 
 watch(() => route.query, () => route.name === 'Posts' && onLoad(false), { immediate: true })
-onServerPrefetch(() => onLoad(true))
+onServerPrefetch(async () => {
+  await onLoad(true)
+})
 </script>

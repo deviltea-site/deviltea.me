@@ -38,7 +38,21 @@ export const routerOptions: RouterOptions = {
         }
       })
   ],
-  scrollBehavior () {
+  scrollBehavior (to, from, savedPosition) {
+    if (to.fullPath === from.fullPath) {
+      return
+    }
+
+    setTimeout(() => {
+      const targetId = to.hash.slice(1)
+      const target = targetId
+        ? document.querySelector(`#${targetId}`) as HTMLElement ?? null
+        : null
+      if (target !== null) {
+        scrollTo({ top: target.offsetTop, left: 0, behavior: 'smooth' })
+      }
+    }, 700)
+
     return { top: 0, left: 0, behavior: 'smooth' }
   }
 }
