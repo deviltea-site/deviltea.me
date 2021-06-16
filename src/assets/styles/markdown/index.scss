@@ -147,10 +147,18 @@
 
   div.info {
     --custom-container-text-color: #008fb7;
+
+    @include dark {
+      --custom-container-text-color: #00b7ea;
+    }
   }
 
   div.warning {
-    --custom-container-text-color: #eacf00;
+    --custom-container-text-color: #cdb606;
+
+    @include dark {
+      --custom-container-text-color: #eacf00;
+    }
   }
 
   div.error {
@@ -231,7 +239,20 @@
 }
 
 @mixin table {
+  table {
+    margin: 1rem 0;
+    border-collapse: collapse;
 
+    th,
+    td {
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+
+      @include dark {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
 }
 
 @mixin markdown {
@@ -288,5 +309,6 @@
     @include deflist;
     @include mark;
     @include list;
+    @include table;
   }
 }
