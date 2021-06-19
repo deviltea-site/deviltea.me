@@ -6,9 +6,18 @@
     w:h="16 xsOnly:12"
     w:flex="~"
     w:align="items-center"
-    w:bg="default-bg-light/95 dark:default-bg-dark/95"
-    w:shadow="~"
   >
+    <div
+      w:pos="absolute top-0 left-0 "
+      w:z="-1"
+      w:w="screen"
+      w:h="16 xsOnly:12"
+      w:bg="default-bg-light/60 dark:default-bg-dark/60"
+      w:shadow="~"
+      w:transition="~ duration-500"
+      :class="scrollY > 0 ? 'opacity-100' : 'opacity-1'"
+    ></div>
+
     <router-link
       v-for="link in internalLinks"
       :key="`nav-item-${link.text}`"
