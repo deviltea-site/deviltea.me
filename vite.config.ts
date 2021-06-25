@@ -1,6 +1,7 @@
 import {} from 'vite-ssg'
 import { join } from 'path'
 import { defineConfig } from 'vite'
+import CleanCSS from 'clean-css'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
 import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
@@ -39,9 +40,32 @@ export default defineConfig({
         componentPrefix: 'icon'
       })
     }),
-    WindiCSS(),
+    WindiCSS({
+      onInitialized (utils) {
+        const clean = new CleanCSS({
+          // Just enable the needed options
+          level: {
+            1: {
+              all: false,
+              removeEmpty: true,
+              tidySelectors: true,
+              specialComments: 'all'
+            }
+          },
+          format: 'beautify'
+        })
+        const originalGenerateCSS = utils.generateCSS
+        const proxiedGenerateCSS: typeof utils.generateCSS = async (layer) => {
+          // Generate CSS and transform comments to special comment format (start with '/*!')
+          const css = (await originalGenerateCSS(layer)).replace(/\/\*/g, '/*!')
+          return clean.minify(css).styles
+        }
+        utils.originalGenerateCSS = utils.generateCSS
+        utils.generateCSS = proxiedGenerateCSS
+      }
+    }),
     Stylelint({
-      exclude: /(node_modules)|(windi\.css)/
+      exclude: /(node_modules)|(windi)/
     }),
     Eslint({
       include: ['**/*.{js,ts,vue}']

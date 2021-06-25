@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@amatlash/vite-plugin-stylelint': ^1.1.1
   '@iconify/json': ^1.1.360
+  '@types/clean-css': ^4.2.4
   '@types/inquirer': ^7.3.2
   '@types/lodash': ^4.14.170
   '@types/markdown-it': ^12.0.2
@@ -17,6 +18,7 @@ specifiers:
   '@vueuse/head': ^0.5.1
   axios: ^0.21.1
   blog-post-meta: ^0.0.10
+  clean-css: ^5.1.2
   dotenv: ^8.6.0
   eslint: ^7.29.0
   eslint-config-standard: ^16.0.3
@@ -88,6 +90,7 @@ dependencies:
 devDependencies:
   '@amatlash/vite-plugin-stylelint': 1.1.1_vite@2.3.8
   '@iconify/json': 1.1.360
+  '@types/clean-css': 4.2.4
   '@types/inquirer': 7.3.2
   '@types/lodash': 4.14.170
   '@types/markdown-it': 12.0.2
@@ -99,6 +102,7 @@ devDependencies:
   '@vue/compiler-sfc': 3.1.2_vue@3.1.2
   '@vue/server-renderer': 3.1.2_vue@3.1.2
   blog-post-meta: 0.0.10
+  clean-css: 5.1.2
   dotenv: 8.6.0
   eslint: 7.29.0
   eslint-config-standard: 16.0.3_485ba97d72774394ef1a34a7eb4340db
@@ -458,6 +462,13 @@ packages:
   /@tootallnate/once/1.1.2:
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
     engines: {node: '>= 6'}
+    dev: true
+
+  /@types/clean-css/4.2.4:
+    resolution: {integrity: sha512-x8xEbfTtcv5uyQDrBXKg9Beo5QhTPqO4vM0uq4iU27/nhyRRWNEMKHjxvAb0WDvp2Mnt4Sw0jKmIi5yQF/k2Ag==}
+    dependencies:
+      '@types/node': 14.17.4
+      source-map: 0.6.1
     dev: true
 
   /@types/estree/0.0.48:
@@ -1159,6 +1170,13 @@ packages:
   /clean-css/4.2.3:
     resolution: {integrity: sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA==}
     engines: {node: '>= 4.0'}
+    dependencies:
+      source-map: 0.6.1
+    dev: true
+
+  /clean-css/5.1.2:
+    resolution: {integrity: sha512-QcaGg9OuMo+0Ds933yLOY+gHPWbxhxqF0HDexmToPf8pczvmvZGYzd+QqWp9/mkucAOKViI+dSFOqoZIvXbeBw==}
+    engines: {node: '>= 10.0'}
     dependencies:
       source-map: 0.6.1
     dev: true
