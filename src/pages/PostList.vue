@@ -1,8 +1,8 @@
 <template>
-  <section w:m="y-16">
+  <section>
     <Transition name="fade-vertical" mode="out-in">
       <div v-if="!isLoading">
-        <div w:w="smOnly:w-2/3 mdAndUp:w-3/5" w:m="auto" w:p="2">
+        <div w:w="full smOnly:w-2/3 mdAndUp:w-3/5" w:m="auto" w:p="2">
           <h1 w:p="b-8" w:font="extralight" w:text="5xl smAndDown:center">
             <span w:p="r-8 smAndDown:x-4" w:border="b-1 current">{{ titleText }}</span>
           </h1>
@@ -22,6 +22,7 @@
 import { useMetas } from '@/modules/metas'
 import { computed, onServerPrefetch, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { isClient } from '@vueuse/core'
 import postsAPI from '@/api/posts'
 
 import LoadingSpinner from '@/components/App/LoadingSpinner.vue'
@@ -131,7 +132,7 @@ async function onLoad (ssr: boolean) {
   isLoading.value = false
 }
 
-watch(() => route.query, () => route.name === 'Posts' && onLoad(false), { immediate: true })
+watch(() => route.query, () => route.name === 'Posts' && onLoad(!isClient), { immediate: true })
 onServerPrefetch(async () => {
   await onLoad(true)
 })

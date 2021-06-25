@@ -14,8 +14,8 @@
             w:display="inline-block"
             w:m="smAndDown:y-4"
             w:p="x-3 y-1"
-            w:bg="default-bg-light/30 dark:default-bg-dark/30"
-            w:text="2xl smAndDown:(center xl) default-text-light/50 dark:default-text-dark/50"
+            w:bg="nord6/30 dark:nord2/30"
+            w:text="2xl smAndDown:(center xl) nord2/50 dark:nord6/50"
             w:font="light"
             w:border="rounded-full"
           >{{ group.publishedYear }}</span>

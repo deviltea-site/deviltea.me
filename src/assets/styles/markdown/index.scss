@@ -6,24 +6,64 @@
 @import "./highlight";
 
 @mixin variables {
-  --link-color: #008fb7;
-  --link-hover-color: #33d3ff;
-  --blockquote-side-color: #008fb7;
-  --blockquote-text-color: #666;
-  --blockquote-bg-color: #f0f2f5;
-  --code-text-color: #404040;
-  --code-bg-color: #f0f2f5;
-  --inline-code-text-color: #00b0e0;
-  --inline-code-bg-color: #f0f2f5;
-  --deflist-bg-color: #f0f2f5;
+  --link-color: theme('colors.nord8');
+  --link-hover-background-color: theme('colors.nord6');
+  --blockquote-side-color: theme('colors.nord8');
+  --blockquote-text-color: theme('colors.nord3');
+  --blockquote-bg-color: theme('colors.nord6');
+  --code-text-color: theme('colors.nord1');
+  --code-bg-color: theme('colors.nord6');
+  --inline-code-text-color: theme('colors.nord3');
+  --inline-code-bg-color: theme('colors.nord6');
+  --deflist-bg-color: theme('colors.nord6');
 
   @include dark {
-    --blockquote-text-color: #aaa;
-    --blockquote-bg-color: #2e3440;
-    --code-text-color: #f8f8f2;
-    --code-bg-color: #2e3440;
-    --inline-code-bg-color: #2e3440;
-    --deflist-bg-color: #2e3440;
+    --link-hover-background-color: theme('colors.nord3');
+    --blockquote-text-color: theme('colors.nord4');
+    --blockquote-bg-color: theme('colors.nord1');
+    --code-text-color: theme('colors.nord4');
+    --code-bg-color: theme('colors.nord1');
+    --inline-code-text-color: theme('colors.nord4');
+    --inline-code-bg-color: theme('colors.nord3');
+    --deflist-bg-color: theme('colors.nord1');
+  }
+}
+
+@mixin common {
+  & > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  a,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  div,
+  span {
+    font-weight: 200;
+    word-break: break-word;
+  }
+
+  blockquote,
+  pre,
+  .info,
+  .warning,
+  .error,
+  .success,
+  ul,
+  ol,
+  li {
+    transform: scale(0.99);
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1);
+      transition: transform 0.2s;
+    }
   }
 }
 
@@ -34,13 +74,6 @@
       & > * {
         font-size: #{(2 - ($i - 1) * 0.25)}em;
         font-weight: 500;
-      }
-
-      &::before {
-        content: '';
-        display: block;
-        height: 4rem;
-        margin-top: -4rem;
       }
 
       .header-anchor {
@@ -70,28 +103,12 @@
     transition: all 0.2s;
 
     &:hover {
-      color: var(--link-hover-color);
+      background-color: var(--link-hover-background-color);
       transition: all 0.2s;
     }
 
     &::content {
       word-break: break-all;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -0.2rem;
-      left: 0;
-      width: 20%;
-      height: 0.1rem;
-      background-color: currentColor;
-      transition: all 0.2s;
-    }
-
-    &:hover::after {
-      width: 100%;
-      transition: all 0.2s;
     }
   }
 }
@@ -109,7 +126,7 @@
     border-left: 0.5rem solid var(--blockquote-side-color);
     color: var(--blockquote-text-color);
     background-color: var(--blockquote-bg-color);
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
+    font-style: italic;
 
     blockquote {
       margin: 1.5rem 0.5rem;
@@ -261,42 +278,7 @@
 
     position: relative;
 
-    & > *:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
-
-    a,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    div,
-    span {
-      font-weight: 200;
-      word-break: break-word;
-    }
-
-    blockquote,
-    pre,
-    div.info,
-    div.warning,
-    div.error,
-    div.success,
-    ul,
-    ol,
-    li {
-      transform: scale(0.99);
-      transition: transform 0.2s;
-
-      &:hover {
-        transform: scale(1);
-        transition: transform 0.2s;
-      }
-    }
-
+    @include common;
     @include heading;
     @include divider;
     @include link;

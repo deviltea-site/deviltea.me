@@ -6,16 +6,19 @@
     w:h="16 xsOnly:12"
     w:flex="~"
     w:align="items-center"
+    w:transform="~"
+    w:transition="~"
+    :class="scrollY <= 30 || scrollDirection === 'up' ? 'translate-y-0' : '-translate-y-full'"
   >
     <div
       w:pos="absolute top-0 left-0 "
       w:z="-1"
       w:w="screen"
       w:h="16 xsOnly:12"
-      w:bg="default-bg-light/60 dark:default-bg-dark/60"
+      w:bg="nord6 dark:nord2"
       w:shadow="~"
       w:transition="~ duration-500"
-      :class="scrollY > 0 ? 'opacity-100' : 'opacity-1'"
+      :class="scrollY > 30 ? 'opacity-100' : 'opacity-1'"
     ></div>
 
     <router-link
@@ -59,10 +62,15 @@
 <script setup lang="ts">
 import { useTheme } from '~/src/modules/theme'
 import { useWindowScroll } from '@vueuse/core'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const { isDark, toggleColorSchema } = useTheme()
 const { y: scrollY } = useWindowScroll()
+const scrollDirection = ref<'up' | 'down'>('up')
+
+watch(scrollY, (value, oldValue) => {
+  scrollDirection.value = value > oldValue ? 'down' : 'up'
+})
 
 const internalLinks = [
   {

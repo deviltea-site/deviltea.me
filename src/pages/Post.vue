@@ -2,10 +2,11 @@
   <Transition name="fade-vertical" mode="out-in">
     <article
       v-if="!isLoading && mdModule"
-      w:p="x-6 y-16 xsOnly:x-4"
-      w:m="x-auto y-4"
+      w:p="6 xsOnly:x-4 y-16"
+      w:m="x-auto"
       w:w="max-50rem"
       w:overflow="hidden"
+      w:bg="white dark:nord0"
     >
       <section w:transition="~">
         <h1 w:font="extralight leading-normal" w:text="4xl">{{ mdModule.attributes.title }}</h1>
@@ -47,14 +48,15 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useMetas } from '@/modules/metas'
-import { computed, onMounted, onServerPrefetch, ref, watch } from 'vue'
+import { computed, onServerPrefetch, ref, watch } from 'vue'
 
 import LoadingSpinner from '@/components/App/LoadingSpinner.vue'
 
 const { title, description } = useMetas()
 const route = useRoute()
+const router = useRouter()
 const postId = computed(() => String(route.meta.postId))
 const mdModule = ref<typeof import('*.md') | null>(null)
 const isLoading = ref(false)
@@ -81,13 +83,17 @@ const onLoad = async () => {
   isLoading.value = false
 }
 
-watch(mdModule, () => {
+watch(mdModule, async () => {
   if (mdModule.value === null) {
     return
   }
+  // Trigger the hash scroll behavior
+  mdModule.value.VueComponent.mounted = async () => {
+    await router.replace(route)
+  }
   title.value = mdModule.value.attributes.title
   description.value = mdModule.value.attributes.description
-})
+}, { immediate: true })
 
 watch(() => postId.value, async () => {
   String(route.name).startsWith('Post:') && await onLoad()

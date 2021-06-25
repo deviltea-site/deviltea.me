@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 import { RouterOptions } from 'vite-ssg'
 import type { RouteRecordRaw } from 'vue-router'
+import type { Emitter } from 'mitt'
 
 const baseUrl = import.meta.env.BASE_URL ?? '/'
 
@@ -38,21 +39,22 @@ export const routerOptions: RouterOptions = {
         }
       })
   ],
-  scrollBehavior (to, from, savedPosition) {
-    if (to.fullPath === from.fullPath) {
-      return
-    }
-
-    setTimeout(() => {
-      const targetId = to.hash.slice(1)
-      const target = targetId
-        ? document.querySelector(`#${targetId}`) as HTMLElement ?? null
-        : null
-      if (target !== null) {
-        scrollTo({ top: target.offsetTop, left: 0, behavior: 'smooth' })
+  async scrollBehavior (to, from, savedPosition) {
+    const p = (new Promise((resolve) => {
+    }))
+    if (to.hash) {
+      const el = window && document.querySelector(`[id="${to.hash.slice(1)}"]`)
+      if (el) {
+        return {
+          behavior: 'smooth',
+          el,
+          top: 64
+        }
       }
-    }, 700)
-
-    return { top: 0, left: 0, behavior: 'smooth' }
+    }
+    return {
+      behavior: 'auto',
+      top: 0
+    }
   }
 }

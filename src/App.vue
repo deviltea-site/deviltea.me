@@ -1,7 +1,7 @@
 <template>
   <Navbar></Navbar>
   <router-view v-slot="{ Component, route }">
-    <main :id="route.name">
+    <main :id="route.name" w:m="t-16">
       <transition name="fade" mode="out-in">
         <keep-alive>
           <component :is="Component" />

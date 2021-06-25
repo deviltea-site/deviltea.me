@@ -23,7 +23,10 @@ function allPlugins (md: MarkdownIt) {
     .use(pluginAnchor, {
       permalink: true,
       permalinkBefore: true,
-      permalinkSymbol: '<icon-bx-bx-anchor></icon-bx-bx-anchor>'
+      permalinkSymbol: '<icon-bx-bx-anchor></icon-bx-bx-anchor>',
+      permalinkAttrs: (slug: string) => {
+        return { '@click.prevent': `$router.push({ ...$route, hash: '#${slug}' })` }
+      }
     })
     .use(pluginFootnote)
     .use(pluginDeflist)
